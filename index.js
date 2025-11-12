@@ -14,7 +14,7 @@ const plotTwistPrompts = [
 const chaosPrompts = [
   "[OOC: You will NOW do something UNPREDICTABLE that leads to ultimate CHAOS and DRAMA.]"
 ];
-// Гигантский рандомный промпт с {{random::...}}
+
 const randomStalePrompt = `Actually, the scene is getting stale. Introduce {{random::stakes::a plot twist::a new character::a cataclysm::a fourth-wall-breaking joke::a sudden atmospheric phenomenon::a plot hook::a running gag::an ecchi scenario::Death from Discworld::a new stake::a drama::a conflict::an angered entity::a god::a vision::a prophetic dream::Il Dottore from Genshin Impact::a new development::a civilian in need::an emotional bit::a threat::a villain::an important memory recollection::a marriage proposal::a date idea::an angry horde of villagers with pitchforks::a talking animal::an enemy::a cliffhanger::a short omniscient POV shift to a completely different character::a quest::an unexpected revelation::a scandal::an evil clone::death of an important character::harm to an important character::a romantic setup::a gossip::a messenger::a plot point from the past::a plot hole::a tragedy::a ghost::an otherworldly occurrence::a plot device::a curse::a magic device::a rival::an unexpected pregnancy::a brothel::a prostitute::a new location::a past lover::a completely random thing::a what-if scenario::a significant choice::war::love::a monster::lewd undertones::Professor Mari::a travelling troupe::a secret::a fortune-teller::something completely different::a killer::a murder mystery::a mystery::a skill check::a deus ex machina::three raccoons in a trench coat::a pet::a slave::an orphan::a psycho::tentacles::"there is only one bed" trope::accidental marriage::a fun twist::a boss battle::sexy corn::an eldritch horror::a character getting hungry, thirsty, or exhausted::horniness::a need for a bathroom break need::someone fainting::an assassination attempt::a meta narration of this all being an out of hand DND session::a dungeon::a friend in need::an old friend::a small time skip::a scene shift::Aurora Borealis, at this time of year, at this time of day, at this part of the country::a grand ball::a surprise party::zombies::foreshadowing::a Spanish Inquisition (nobody expects it)::a natural plot progression}} to make things more interesting! Be creative, but stay grounded in the setting.`;
 const neutralPrompt = "Actually, the scene is getting stale. Progress it, to make things more interesting! Reintroduce an unresolved plot point from the past. Be creative, but stay grounded in the setting.";
 const promptTypes = {
@@ -65,7 +65,7 @@ const panelHtml = `
  * 3. CSS-СТИЛИ
  */
 const panelStyles = `
-/* КОНТЕЙНЕР ПРИКРЕПЛЕН К ОКНУ БРАУЗЕРА */
+
 .auto-event-container-fix {
   position: fixed !important;
   z-index: 99999 !important;
@@ -80,7 +80,7 @@ const panelStyles = `
   flex-direction: column;
   gap: 8px;
 }
-/* ХЕДЕР С ДРАГ-ХЭНДЛОМ И КНОПКОЙ СВОРАЧИВАНИЯ */
+
 .auto-event-header-fix {
   display: flex;
   align-items: center;
@@ -109,7 +109,7 @@ const panelStyles = `
 .auto-event-minimize-btn-fix:hover {
   color: #ffd700;
 }
-/* СТИЛЬ МИНИ-КНОПКИ ДЛЯ МОБИЛЬНЫХ */
+
 .auto-event-mini-btn-fix {
   position: fixed !important;
   z-index: 99999 !important;
@@ -135,7 +135,7 @@ const panelStyles = `
 .auto-event-hidden {
   display: none !important;
 }
-/* Стиль для самих кнопок */
+
 .auto-event-button-fix {
   background: var(--secondary-btn-bg);
   color: var(--secondary-btn-text);
@@ -148,21 +148,21 @@ const panelStyles = `
   width: 100%;
   letter-spacing: 0.5px;
 }
-/* Эффект при наведении */
+
 .auto-event-button-fix:hover {
   background: var(--secondary-btn-hover-bg);
   color: var(--secondary-btn-hover-text);
 }
-/* Иконки внутри кнопок */
+
 .auto-event-button-fix i {
   margin-right: 5px;
 }
-/* Активная кнопка (для РАНДОМ) */
+
 .auto-event-button-fix.active {
   background: rgba(0, 128, 0, 0.8) !important;
   color: #fff;
 }
-/* Стили для кастомного уведомления */
+
 .auto-event-notification {
   position: fixed !important;
   top: 20px !important;
@@ -217,14 +217,12 @@ function addHiddenPrompt(prompt) {
  */
 jQuery(async () => {
   try {
-    // 1. Инжектируем стили
+   
     const styleElement = $('<style>').html(panelStyles);
     $('head').append(styleElement);
-    // 2. Инжектируем HTML в тело страницы
+
     $('body').append(panelHtml);
-    // 3. Переменные для режима рандома (теперь не используется, но оставляем логику выбора для кнопки)
-    // 4. Удаляем слушатель на кнопку отправки, так как рандом теперь работает как другие кнопки
-    // 5. Слушатель событий (кнопки событий)
+
     $('#auto-event-panel-fix').on('click', '.auto-event-button-fix', function() {
       const buttonId = $(this).attr('id');
       let prompt = '';
@@ -235,7 +233,7 @@ jQuery(async () => {
       } else if (buttonId === 'event-neutral') {
         prompt = neutralPrompt;
       } else if (buttonId === 'event-random') {
-        // Логика случайного выбора промпта, как в бывшем автоматическом режиме
+    
         const eventChance = Math.random();
         if (eventChance < 0.4) {
           // 40% — обычные повороты
@@ -244,7 +242,7 @@ jQuery(async () => {
           // 20% — хаос
           prompt = chaosPrompts[Math.floor(Math.random() * chaosPrompts.length)];
         } else {
-          // 40% — гигантский рандом с {{random::}}
+          // 40% — гигантский рандом 
           prompt = randomStalePrompt;
         }
       }
@@ -383,4 +381,5 @@ jQuery(async () => {
   } catch (error) {
     console.error("Критическая ошибка при загрузке 'Кнопок Авто-Событий':", error);
   }
+
 });
