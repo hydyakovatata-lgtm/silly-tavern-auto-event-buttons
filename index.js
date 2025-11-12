@@ -17,6 +17,7 @@ const chaosPrompts = [
 ];
 // Гигантский рандомный промпт с {{random::...}}
 const randomStalePrompt = `Actually, the scene is getting stale. Introduce {{random::stakes::a plot twist::a new character::a cataclysm::a fourth-wall-breaking joke::a sudden atmospheric phenomenon::a plot hook::a running gag::an ecchi scenario::Death from Discworld::a new stake::a drama::a conflict::an angered entity::a god::a vision::a prophetic dream::Il Dottore from Genshin Impact::a new development::a civilian in need::an emotional bit::a threat::a villain::an important memory recollection::a marriage proposal::a date idea::an angry horde of villagers with pitchforks::a talking animal::an enemy::a cliffhanger::a short omniscient POV shift to a completely different character::a quest::an unexpected revelation::a scandal::an evil clone::death of an important character::harm to an important character::a romantic setup::a gossip::a messenger::a plot point from the past::a plot hole::a tragedy::a ghost::an otherworldly occurrence::a plot device::a curse::a magic device::a rival::an unexpected pregnancy::a brothel::a prostitute::a new location::a past lover::a completely random thing::a what-if scenario::a significant choice::war::love::a monster::lewd undertones::Professor Mari::a travelling troupe::a secret::a fortune-teller::something completely different::a killer::a murder mystery::a mystery::a skill check::a deus ex machina::three raccoons in a trench coat::a pet::a slave::an orphan::a psycho::tentacles::"there is only one bed" trope::accidental marriage::a fun twist::a boss battle::sexy corn::an eldritch horror::a character getting hungry, thirsty, or exhausted::horniness::a need for a bathroom break need::someone fainting::an assassination attempt::a meta narration of this all being an out of hand DND session::a dungeon::a friend in need::an old friend::a small time skip::a scene shift::Aurora Borealis, at this time of year, at this time of day, at this part of the country::a grand ball::a surprise party::zombies::foreshadowing::a Spanish Inquisition (nobody expects it)::a natural plot progression}} to make things more interesting! Be creative, but stay grounded in the setting.`;
+const fullChaosPrompt = `Actually, the scene is getting stale. Introduce {{random::stakes::a plot twist::a new character::a cataclysm::a fourth-wall-breaking joke::a sudden atmospheric phenomenon::a plot hook::a running gag::an ecchi scenario::Death from Discworld::a new stake::a drama::a conflict::an angered entity::a god::a vision::a prophetic dream::Il Dottore from Genshin Impact::a new development::a civilian in need::an emotional bit::a threat::a villain::an important memory recollection::a marriage proposal::a date idea::an angry horde of villagers with pitchforks::a talking animal::an enemy::a cliffhanger::a short omniscient POV shift to a completely different character::a quest::an unexpected revelation::a scandal::an evil clone::death of an important character::harm to an important character::a romantic setup::a gossip::a messenger::a plot point from the past::a plot hole::a tragedy::a ghost::an otherworldly occurrence::a plot device::a curse::a magic device::a rival::an unexpected pregnancy::a brothel::a prostitute::a new location::a past lover::a completely random thing::a what-if scenario::a significant choice::war::love::a monster::lewd undertones::Professor Mari::a travelling troupe::a secret::a fortune-teller::something completely different::a killer::a murder mystery::a mystery::a skill check::a deus ex machina::three raccoons in a trench coat::a pet::a slave::an orphan::a psycho::tentacles::"there is only one bed" trope::accidental marriage::a fun twist::a boss battle::sexy corn::an eldritch horror::a character getting hungry, thirsty, or exhausted::horniness::a need for a bathroom break need::someone fainting::an assassination attempt::a meta narration of this all being an out of hand DND session::a dungeon::a friend in need::an old friend::a small time skip::a scene shift::Aurora Borealis, at this time of year, at this time of day, at this part of the country::a grand ball::a surprise party::zombies::foreshadowing::a Spanish Inquisition (nobody expects it)::a natural plot progression}} to make things more interesting! Be creative and wild. Don't pay attention to the surroundings`;
 const neutralPrompt = "Actually, the scene is getting stale. Progress it, to make things more interesting! Reintroduce an unresolved plot point from the past. Be creative, but stay grounded in the setting.";
 const promptTypes = {
   "[OOC: You will NOW introduce an unpredictable PLOT TWIST!]": "Неожиданный поворот",
@@ -27,7 +28,8 @@ const promptTypes = {
   "[OOC: You will NOW cause an environmental change, like weather or location shift, that alters the story!]": "Изменение окружения",
   "[OOC: You will NOW do something UNPREDICTABLE that leads to ultimate CHAOS and DRAMA.]": "Хаос и драма",
   "Actually, the scene is getting stale. Progress it, to make things more interesting! Reintroduce an unresolved plot point from the past. Be creative, but stay grounded in the setting.": "Нейтральный",
-  [randomStalePrompt]: "Рандомный поворот"
+  [randomStalePrompt]: "Рандомный поворот",
+  [fullChaosPrompt]: "Полный хаос"
 };
 /**
  * 2. HTML-КОНТЕНТ
@@ -55,6 +57,10 @@ const panelHtml = `
  
   <button id="event-random" class="auto-event-button-fix">
     <i class="fa-solid fa-dice"></i> РАНДОМ
+  </button>
+
+  <button id="event-full-chaos" class="auto-event-button-fix">
+    <i class="fa-solid fa-skull"></i> ПОЛНЫЙ ХАОС
   </button>
 </div>
 <!-- МИНИ-КНОПКА ДЛЯ МОБИЛЬНЫХ -->
@@ -244,6 +250,8 @@ jQuery(async () => {
         prompt = neutralPrompt;
       } else if (buttonId === 'event-random') {
         prompt = randomStalePrompt;
+      } else if (buttonId === 'event-full-chaos') {
+        prompt = fullChaosPrompt;
       }
       if (prompt) {
         addHiddenPrompt(prompt);
