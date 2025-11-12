@@ -1,0 +1,46 @@
+/* Контейнер, который появится над полем ввода */
+.auto-event-container {
+  /* Используем переменные SillyTavern для фона */
+  background: var(--dark-bg);
+  padding: 8px;
+  border-bottom: 1px solid var(--dark-black-transparent);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Маленький заголовок */
+.auto-event-container h4 {
+  width: 100%;
+  text-align: center;
+  margin: 0 0 5px 0;
+  color: var(--text-color);
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+/* Стиль для самих кнопок */
+.auto-event-button {
+  /* Используем стиль кнопок ST */
+  background: var(--secondary-btn-bg);
+  color: var(--secondary-btn-text);
+  border: 1px solid var(--secondary-btn-border);
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 0.8em;
+  transition: background-color 0.2s ease;
+}
+
+/* Эффект при наведении */
+.auto-event-button:hover {
+  background: var(--secondary-btn-hover-bg);
+  color: var(--secondary-btn-hover-text);
+}
+
+/* Иконки внутри кнопок */
+.auto-event-button i {
+  margin-right: 5px;
+}
